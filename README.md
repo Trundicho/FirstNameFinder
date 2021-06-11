@@ -9,12 +9,12 @@ Use blank " " to filter multiple.
 ![Screenshot](FirstNameFinderExample.png)
 
 ## Name data base is missing in the repo
-I was not able to get the permission to publish the name database from heise.
+I was not yet able to get the permission to publish the name database from heise.de.
 
 But there is a project on github that already published it:
 https://github.com/cstuder/genderReader/blob/master/gender.c/nam_dict.txt
 
-Just put it in the resources file.
+Just put it in the resources folder.
 
 You can also use your own and adjust FirstNameModelBuilder to read your own name database.
 Then you would also have to adjust the file name in the application.properties.

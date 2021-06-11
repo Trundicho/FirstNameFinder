@@ -19,7 +19,10 @@ Just put it in the resources folder.
 You can also use your own and adjust FirstNameModelBuilder to read your own name database.
 Then you would also have to adjust the file name in the application.properties.
 
-
 ## Run the application
 Start FirstNameFinderApplication
 Open in your browser: localhost:8080/ui
+
+## Background
+First name finder was implemented between christmas and new year 2017/2018 to help to 
+find a name for our child.

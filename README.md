@@ -1,5 +1,7 @@
 # First name finder
+If you try to find a name for your unborn for example - here you have an easy tool.
 
+![alt text](FirstNameFinderExample.png)
 
 ## Name data base is missing in the repo
 I was not able to get the permission to publish the name database from heise.

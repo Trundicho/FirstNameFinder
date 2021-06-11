@@ -23,6 +23,23 @@ Then you would also have to adjust the file name in the application.properties.
 Start FirstNameFinderApplication
 Open in your browser: localhost:8080/ui
 
+## Deployment
+
+Put the generated war files in your application server (Tomcat, Jetty) or run the spring-boot vaadin version with internal tomcat.
+## Built With
+
+Spring-Boot - Spring-Boot
+Vaadin - The vaadin-8 web framework used
+GWT - The GWT 2.8 framework used
+Maven - Dependency Management
+
+## Authors
+Angelo Romito - Initial work - Trundicho
+
+## License
+
+This project is licensed under Apache License Version 2.0 - see the LICENSE file for details
+
 ## Background
-First name finder was implemented between christmas and new year 2017/2018 to help to 
+First name finder was implemented between christmas and new year 2017/2018 to help to
 find a name for our child.

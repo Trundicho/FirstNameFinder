@@ -1,7 +1,12 @@
 # First name finder
 If you try to find a name for your unborn for example - here you have an easy tool.
+It gives you plenty of filter possibilities.
 
-![alt text](FirstNameFinderExample.png)
+Just use minus "-" to negate.
+
+Use blank " " to filter multiple.
+
+![Screenshot](FirstNameFinderExample.png)
 
 ## Name data base is missing in the repo
 I was not able to get the permission to publish the name database from heise.

@@ -40,7 +40,7 @@ public class FirstNameModelBuilder {
                 }
             }
         } catch (IOException e) {
-            System.exit(0);
+            throw new IllegalStateException("File not found: " + fileName);
         }
         return firstNameModel;
     }

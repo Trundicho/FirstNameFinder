@@ -9,6 +9,12 @@ Use blank " " to filter multiple.
 ![Screenshot](FirstNameFinderExample.png)
 
 ## Name data base is missing in the repo
+FirstNameFinder is based on the prename dictionary `nam_dict.txt` of the `gender.c`-project.
+
+Download link for the original `gender`.c: http://www.heise.de/ct/ftp/07/17/182/
+
+Link to the (german) article introducing `gender.c`: https://www.heise.de/artikel-archiv/ct/2007/17/182
+
 I was not yet able to get the permission to publish the name database from heise.de.
 
 But there is a project on github that already published it:

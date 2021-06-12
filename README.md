@@ -18,20 +18,39 @@ Just put it in the resources folder.
 
 You can also use your own and adjust FirstNameModelBuilder to read your own name database.
 Then you would also have to adjust the file name in the application.properties.
+## Getting Started
+What things you need to install the software and how to install them
 
-## Run the application
+### Run the application
 Start FirstNameFinderApplication
 Open in your browser: localhost:8080/ui
 
-## Deployment
+### Run with docker
+Go to the root directory of firstNameFinder
+
+Build the docker image:
+
+sudo docker build -t first-name-finder:1.0 .
+
+Run the docker image:
+
+sudo docker run -d -p 8080:8080 -t first-name-finder:1.0
+
+### Deployment
 
 Put the generated war files in your application server (Tomcat, Jetty) or run the spring-boot vaadin version with internal tomcat.
+
+### Prerequisites
+
+- Java 8 JDK
+- A JAVA IDE
+
 ## Built With
 
-Spring-Boot - Spring-Boot
-Vaadin - The vaadin-8 web framework used
-GWT - The GWT 2.8 framework used
-Maven - Dependency Management
+* [Spring-Boot](http://spring.io/projects/spring-boot) - Spring-Boot
+* [Vaadin](https://vaadin.com/docs/v8/framework/tutorial.html) - The vaadin-8 web framework used
+* [GWT](http://www.gwtproject.org/) - The GWT 2.8 framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
 
 ## Authors
 Angelo Romito - Initial work - Trundicho

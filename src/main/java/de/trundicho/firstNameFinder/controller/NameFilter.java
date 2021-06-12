@@ -25,30 +25,24 @@ public final class NameFilter {
     }
 
     private boolean isLongerThan(Integer length, String firstName) {
-        if (length != null) {
-            return firstName.length() >= length;
-        }
-        return true;
+        return length == null || firstName.length() >= length;
     }
 
     private boolean isShorterThan(Integer length, String firstName) {
-        if (length != null) {
-            return firstName.length() <= length;
-        }
-        return true;
+        return length == null || firstName.length() <= length;
     }
 
-    private static boolean filterChars(String firstName, List<String> filter) {
+    private boolean filterChars(String firstName, List<String> filter) {
         if (filter.isEmpty()) {
             return true;
         }
         List<String> filters = new ArrayList<>();
         List<String> filtersNegate = new ArrayList<>();
-        for (String string : filter) {
-            if (!isNegate(string)) {
-                filters.add(string.toLowerCase());
+        for (String filterString : filter) {
+            if (isNegate(filterString)) {
+                filtersNegate.add(filterString.substring(1).toLowerCase());
             } else {
-                filtersNegate.add(string.substring(1).toLowerCase());
+                filters.add(filterString.toLowerCase());
             }
         }
 
@@ -74,12 +68,12 @@ public final class NameFilter {
         return filterCheck && filterCheckNegate;
     }
 
-    private static boolean endsWithFilter(String firstName, String[] filter) {
+    private boolean endsWithFilter(String firstName, String[] filter) {
         if (filter.length == 0) {
             return true;
         }
-        ArrayList<String> filters = new ArrayList<>();
-        ArrayList<String> filtersNegate = new ArrayList<>();
+        List<String> filters = new ArrayList<>();
+        List<String> filtersNegate = new ArrayList<>();
         for (String string : filter) {
             if (!isNegate(string)) {
                 filters.add(string.toLowerCase());
@@ -108,21 +102,21 @@ public final class NameFilter {
         return filterCheck && filterCheckNegate;
     }
 
-    private static boolean isNegate(String string) {
+    private boolean isNegate(String string) {
         return string.startsWith("-") && string.length() > 1;
     }
 
-    private static boolean startsWithFilter(String firstName, String[] filter) {
+    private boolean startsWithFilter(String firstName, String[] filter) {
         if (filter.length == 0) {
             return true;
         }
-        ArrayList<String> filters = new ArrayList<>();
-        ArrayList<String> filtersNegate = new ArrayList<>();
+        List<String> filters = new ArrayList<>();
+        List<String> filtersNegate = new ArrayList<>();
         for (String string : filter) {
-            if (!isNegate(string)) {
-                filters.add(string.toLowerCase());
-            } else {
+            if (isNegate(string)) {
                 filtersNegate.add(string.substring(1).toLowerCase());
+            } else {
+                filters.add(string.toLowerCase());
             }
         }
 

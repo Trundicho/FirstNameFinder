@@ -1,5 +1,6 @@
 package de.trundicho.firstNameFinder.view;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -7,9 +8,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import de.trundicho.firstNameFinder.controller.NameFilter;
 import de.trundicho.firstNameFinder.model.FirstName;
 import de.trundicho.firstNameFinder.model.Gender;
-import de.trundicho.firstNameFinder.controller.NameFilter;
 
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.RadioButtonGroup;
@@ -32,15 +33,15 @@ class GridUiUpdater {
     private final RadioButtonGroup<String> gender;
 
     public GridUiUpdater(TextField containsFilter, TextField notContainsFilter, TextField startsWithFilter, TextField endsWithFilter,
-            Collection<FirstName> all, Comparator<FirstName> byFirstName, NameFilter nameFilter, Grid<FirstName> grid,
-            TextField numberOfNames, Slider minLengthSlider, Slider maxLengthSlider, RadioButtonGroup<String> gender) {
+            Collection<FirstName> all, Comparator<FirstName> byFirstName, Grid<FirstName> grid, TextField numberOfNames,
+            Slider minLengthSlider, Slider maxLengthSlider, RadioButtonGroup<String> gender) {
+        this.nameFilter = new NameFilter();
         this.containsFilter = containsFilter;
         this.notContainsFilter = notContainsFilter;
         this.startsWithFilter = startsWithFilter;
         this.endsWithFilter = endsWithFilter;
         this.all = all;
         this.byFirstName = byFirstName;
-        this.nameFilter = nameFilter;
         this.grid = grid;
         this.numberOfNames = numberOfNames;
         this.minLengthSlider = minLengthSlider;
@@ -77,17 +78,7 @@ class GridUiUpdater {
 
     private Gender getGender(RadioButtonGroup<String> genderGroup) {
         Optional<String> selectedItem = genderGroup.getSelectedItem();
-        Gender gender = null;
-        if (selectedItem.isPresent()) {
-            String s = selectedItem.get();
-            final Gender[] genders = Gender.values();
-            for (Gender gen : genders) {
-                if (gen.getGender().equals(s)) {
-                    return gen;
-                }
-            }
-        }
-        return gender;
+        return selectedItem.flatMap(s -> Arrays.stream(Gender.values()).filter(g -> g.getGender().equals(s)).findFirst()).orElse(null);
     }
 
 }

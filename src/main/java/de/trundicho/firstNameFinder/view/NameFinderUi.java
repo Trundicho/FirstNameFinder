@@ -83,8 +83,8 @@ public class NameFinderUi extends UI {
         numberOfNames.setValue(all.size() + "");
 
         ListenerBuilder listenerBuilder = new ListenerBuilder();
-        listenerBuilder.registerListeners(containsFilter, notContainsFilter, startsWithFilter, endsWithFilter, all, byFirstName,
-                new NameFilter(), grid, numberOfNames, minLengthSlider, maxLengthSlider, gender);
+        listenerBuilder.registerListeners(containsFilter, notContainsFilter, startsWithFilter, endsWithFilter, all,
+                byFirstName, grid, numberOfNames, minLengthSlider, maxLengthSlider, gender);
 
     }
 

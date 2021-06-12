@@ -16,11 +16,11 @@ import com.vaadin.ui.TextField;
 class ListenerBuilder {
 
     public void registerListeners(TextField containsFilter, TextField notContainsFilter, TextField startsWithFilter,
-            TextField endsWithFilter, Collection<FirstName> all, Comparator<FirstName> byFirstName, NameFilter nameFilter,
+            TextField endsWithFilter, Collection<FirstName> all, Comparator<FirstName> byFirstName,
             Grid<FirstName> grid, TextField numberOfNames, Slider minLengthSlider, Slider maxLengthSlider,
             RadioButtonGroup<String> gender) {
         GridUiUpdater gridUiUpdater = new GridUiUpdater(containsFilter, notContainsFilter, startsWithFilter, endsWithFilter, all,
-                byFirstName, nameFilter, grid, numberOfNames, minLengthSlider, maxLengthSlider, gender);
+                byFirstName, grid, numberOfNames, minLengthSlider, maxLengthSlider, gender);
         HasValue.ValueChangeListener<String> listener = valueChangeEvent -> gridUiUpdater.updateGrid();
         containsFilter.addValueChangeListener(listener);
         notContainsFilter.addValueChangeListener(listener);

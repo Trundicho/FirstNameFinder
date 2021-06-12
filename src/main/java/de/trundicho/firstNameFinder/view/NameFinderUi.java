@@ -44,7 +44,7 @@ public class NameFinderUi extends UI {
             firstNameModel = firstNameModelBuilder.buildFirstNameModel(nameDictionaryFileName);
         }
         Grid<FirstName> grid = new Grid<>();
-        final Collection<FirstName> all = firstNameModel.getAll();
+        final Collection<FirstName> all = firstNameModel.getFirstNames();
         Comparator<FirstName> byFirstName = Comparator.comparing(FirstName::getFirstName);
 
         grid.addColumn(FirstName::getFirstName).setCaption("Vorname");

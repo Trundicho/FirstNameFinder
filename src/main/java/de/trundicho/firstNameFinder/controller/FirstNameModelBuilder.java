@@ -2,6 +2,7 @@ package de.trundicho.firstNameFinder.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class FirstNameModelBuilder {
 
     public FirstNameModel buildFirstNameModel(String fileName) {
         FirstNameModel firstNameModel = new FirstNameModel();
+        Collection<FirstName> firstNames = firstNameModel.getFirstNames();
         Resource resource = resourceLoader.getResource("classpath:" + fileName);
         try (InputStream inputStream = resource.getInputStream(); Scanner sc = new Scanner(inputStream)) {
             while (sc.hasNextLine()) {
@@ -35,7 +37,7 @@ public class FirstNameModelBuilder {
                     String firstName = split[2];
 
                     if (!firstName.isEmpty() && !firstName.contains(">")) {
-                        firstNameModel.addFirstName(new FirstName(firstName, gender));
+                        firstNames.add(new FirstName(firstName, gender));
                     }
                 }
             }

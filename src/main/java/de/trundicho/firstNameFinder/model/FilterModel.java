@@ -1,14 +1,14 @@
-package de.trundicho.firstNameFinder.controller;
+package de.trundicho.firstNameFinder.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class FilterModel {
+public class FilterModel {
 
     private final List<String> filters = new ArrayList<>();
     private final List<String> filtersNegate = new ArrayList<>();
 
-    FilterModel(String[] filter) {
+    public FilterModel(String[] filter) {
         for (String filterString : filter) {
             if (isNegate(filterString)) {
                 filtersNegate.add(filterString.substring(1).toLowerCase());

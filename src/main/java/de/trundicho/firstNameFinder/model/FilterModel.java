@@ -10,7 +10,6 @@ public class FilterModel {
 
     private List<String> filters;
     private List<String> filtersNegate;
-    private boolean isEmpty;
 
     public FilterModel(String[] filter) {
         filtersNegate = Arrays.stream(filter).filter(this::isNegate).map(f -> f.substring(1).toLowerCase()).collect(Collectors.toList());
@@ -19,7 +18,6 @@ public class FilterModel {
                         .filter(f -> !StringUtils.pathEquals("-", f))
                         .map(String::toLowerCase)
                         .collect(Collectors.toList());
-        isEmpty = filters.isEmpty() && filtersNegate.isEmpty();
     }
 
     public List<String> getFilters() {
@@ -34,7 +32,4 @@ public class FilterModel {
         return string.startsWith("-") && string.length() > 1;
     }
 
-    public boolean isEmpty() {
-        return isEmpty;
-    }
 }

@@ -30,9 +30,6 @@ public final class NameFilter {
 
     private boolean filter(String firstName, String[] filter, BiFunction<String, String, Boolean> function) {
         FilterModel filterModel = new FilterModel(filter);
-        if (filterModel.isEmpty()) {
-            return true;
-        }
         List<String> filters = filterModel.getFilters();
         List<String> filtersNegate = filterModel.getFiltersNegate();
         boolean filterCheck = filters.isEmpty() || checkFilter(firstName, filters, function);

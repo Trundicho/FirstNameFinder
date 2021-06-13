@@ -22,7 +22,7 @@ import de.trundicho.firstNameFinder.model.FirstNameModel;
 public class FirstNameModelParser {
 
     @Autowired
-    ResourceLoader resourceLoader;
+    private ResourceLoader resourceLoader;
 
     public FirstNameModel parse(String fileName) {
         FirstNameModel firstNameModel = new FirstNameModel();

@@ -20,7 +20,6 @@ import com.vaadin.ui.TextField;
 class GridUiUpdater {
 
     private final TextField containsFilter;
-    private final TextField notContainsFilter;
     private final TextField startsWithFilter;
     private final TextField endsWithFilter;
     private final Collection<FirstName> all;
@@ -32,12 +31,11 @@ class GridUiUpdater {
     private final Slider maxLengthSlider;
     private final RadioButtonGroup<String> gender;
 
-    public GridUiUpdater(TextField containsFilter, TextField notContainsFilter, TextField startsWithFilter, TextField endsWithFilter,
+    public GridUiUpdater(TextField containsFilter,  TextField startsWithFilter, TextField endsWithFilter,
             Collection<FirstName> all, Comparator<FirstName> byFirstName, Grid<FirstName> grid, TextField numberOfNames,
             Slider minLengthSlider, Slider maxLengthSlider, RadioButtonGroup<String> gender) {
         this.nameFilter = new NameFilter();
         this.containsFilter = containsFilter;
-        this.notContainsFilter = notContainsFilter;
         this.startsWithFilter = startsWithFilter;
         this.endsWithFilter = endsWithFilter;
         this.all = all;
@@ -51,7 +49,6 @@ class GridUiUpdater {
 
     public void updateGrid() {
         String containsValues = containsFilter.getValue();
-        String notContainsValues = notContainsFilter.getValue();
         String startsWithValues = startsWithFilter.getValue();
         String endsWithValues = endsWithFilter.getValue();
         Stream<FirstName> sorted = all.parallelStream().sorted(byFirstName);
@@ -59,7 +56,7 @@ class GridUiUpdater {
         Double maxLength = maxLengthSlider.getValue();
         Gender gender = getGender(this.gender);
         final List<FirstName> filtered = sorted.filter(
-                name -> nameFilter.filterNames(name, getFilterValues(containsValues), getFilterValues(notContainsValues),
+                name -> nameFilter.filterNames(name, getFilterValues(containsValues),
                         getFilterValues(startsWithValues), getFilterValues(endsWithValues), minLength.intValue(), maxLength.intValue(),
                         gender)).collect(Collectors.toList());
         numberOfNames.setValue(filtered.size() + "");

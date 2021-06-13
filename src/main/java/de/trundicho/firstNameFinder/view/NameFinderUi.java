@@ -6,9 +6,9 @@ import java.util.Comparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import de.trundicho.firstNameFinder.controller.FirstNameModelParser;
 import de.trundicho.firstNameFinder.model.FirstName;
 import de.trundicho.firstNameFinder.model.FirstNameModel;
-import de.trundicho.firstNameFinder.controller.FirstNameModelParser;
 import de.trundicho.firstNameFinder.model.Gender;
 
 import com.vaadin.annotations.Theme;
@@ -57,12 +57,10 @@ public class NameFinderUi extends UI {
         TextField containsFilter = new TextField("Enthält");
         TextField endsWithFilter = new TextField("Endet mit");
         TextField startsWithFilter = new TextField("Startet mit");
-        TextField notContainsFilter = new TextField("Enthält nicht");
 
         horizontalLayout2.addComponent(containsFilter);
         horizontalLayout2.addComponent(startsWithFilter);
         horizontalLayout2.addComponent(endsWithFilter);
-        horizontalLayout2.addComponent(notContainsFilter);
         TextField numberOfNames = new TextField("#");
         numberOfNames.setEnabled(false);
         Slider minLengthSlider = createSlider(1, "Min Länge");
@@ -82,9 +80,8 @@ public class NameFinderUi extends UI {
         numberOfNames.setValue(all.size() + "");
 
         ListenerBuilder listenerBuilder = new ListenerBuilder();
-        listenerBuilder.registerListeners(containsFilter, notContainsFilter, startsWithFilter, endsWithFilter, all,
-                byFirstName, grid, numberOfNames, minLengthSlider, maxLengthSlider, gender);
-
+        listenerBuilder.registerListeners(containsFilter, startsWithFilter, endsWithFilter, all, byFirstName, grid, numberOfNames,
+                minLengthSlider, maxLengthSlider, gender);
     }
 
     private RadioButtonGroup<String> createGenderRadioGroup() {

@@ -31,7 +31,7 @@ class GridUiUpdater {
     private final Slider maxLengthSlider;
     private final RadioButtonGroup<String> gender;
 
-    public GridUiUpdater(TextField containsFilter,  TextField startsWithFilter, TextField endsWithFilter,
+    GridUiUpdater(TextField containsFilter,  TextField startsWithFilter, TextField endsWithFilter,
             Collection<FirstName> all, Comparator<FirstName> byFirstName, Grid<FirstName> grid, TextField numberOfNames,
             Slider minLengthSlider, Slider maxLengthSlider, RadioButtonGroup<String> gender) {
         this.nameFilter = new NameFilter();

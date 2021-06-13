@@ -1,26 +1,25 @@
 package de.trundicho.firstNameFinder.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.util.StringUtils;
 
 public class FilterModel {
 
-    private final List<String> filters = new ArrayList<>();
-    private final List<String> filtersNegate = new ArrayList<>();
-    private boolean isEmpty = true;
+    private List<String> filters;
+    private List<String> filtersNegate;
+    private boolean isEmpty;
 
     public FilterModel(String[] filter) {
-        for (String filterString : filter) {
-            if (isNegate(filterString)) {
-                isEmpty = false;
-                filtersNegate.add(filterString.substring(1).toLowerCase());
-            } else if(!StringUtils.pathEquals("-", filterString)) {
-                isEmpty = false;
-                filters.add(filterString.toLowerCase());
-            }
-        }
+        filtersNegate = Arrays.stream(filter).filter(this::isNegate).map(f -> f.substring(1).toLowerCase()).collect(Collectors.toList());
+        filters = Arrays.stream(filter)
+                        .filter(f -> !isNegate(f))
+                        .filter(f -> !StringUtils.pathEquals("-", f))
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toList());
+        isEmpty = filters.isEmpty() && filtersNegate.isEmpty();
     }
 
     public List<String> getFilters() {

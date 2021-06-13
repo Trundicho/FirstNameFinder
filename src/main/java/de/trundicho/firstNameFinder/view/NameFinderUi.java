@@ -35,6 +35,8 @@ public class NameFinderUi extends UI {
 
     @Autowired
     private FirstNameModelParser firstNameModelParser;
+    @Autowired
+    private UiListenerBuilder uiListenerBuilder;
     private FirstNameModel firstNameModel;
 
     @Override
@@ -79,8 +81,7 @@ public class NameFinderUi extends UI {
         setContent(verticalLayout);
         numberOfNames.setValue(all.size() + "");
 
-        ListenerBuilder listenerBuilder = new ListenerBuilder();
-        listenerBuilder.registerListeners(containsFilter, startsWithFilter, endsWithFilter, all, byFirstName, grid, numberOfNames,
+        uiListenerBuilder.registerListeners(containsFilter, startsWithFilter, endsWithFilter, all, byFirstName, grid, numberOfNames,
                 minLengthSlider, maxLengthSlider, gender);
     }
 

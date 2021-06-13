@@ -1,5 +1,6 @@
 package de.trundicho.firstNameFinder.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -31,10 +32,10 @@ class GridUiUpdater {
     private final Slider maxLengthSlider;
     private final RadioButtonGroup<String> gender;
 
-    GridUiUpdater(TextField containsFilter,  TextField startsWithFilter, TextField endsWithFilter,
+    GridUiUpdater(NameFilter nameFilter, TextField containsFilter, TextField startsWithFilter, TextField endsWithFilter,
             Collection<FirstName> all, Comparator<FirstName> byFirstName, Grid<FirstName> grid, TextField numberOfNames,
             Slider minLengthSlider, Slider maxLengthSlider, RadioButtonGroup<String> gender) {
-        this.nameFilter = new NameFilter();
+        this.nameFilter = nameFilter;
         this.containsFilter = containsFilter;
         this.startsWithFilter = startsWithFilter;
         this.endsWithFilter = endsWithFilter;
@@ -56,21 +57,20 @@ class GridUiUpdater {
         Double maxLength = maxLengthSlider.getValue();
         Gender gender = getGender(this.gender);
         final List<FirstName> filtered = sorted.filter(
-                name -> nameFilter.filterNames(name, getFilterValues(containsValues),
-                        getFilterValues(startsWithValues), getFilterValues(endsWithValues), minLength.intValue(), maxLength.intValue(),
-                        gender)).collect(Collectors.toList());
+                name -> nameFilter.filterNames(name, getFilterValues(containsValues), getFilterValues(startsWithValues),
+                        getFilterValues(endsWithValues), minLength.intValue(), maxLength.intValue(), gender)).collect(Collectors.toList());
         numberOfNames.setValue(filtered.size() + "");
         grid.setItems(filtered);
     }
 
-    private String[] getFilterValues(String value) {
+    private List<String> getFilterValues(String value) {
         final String[] split = value.split(" ");
         if (split.length == 1) {
             if (split[0].equals("")) {
-                return new String[] {};
+                return new ArrayList<>();
             }
         }
-        return split;
+        return Arrays.asList(split);
     }
 
     private Gender getGender(RadioButtonGroup<String> genderGroup) {

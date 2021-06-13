@@ -3,13 +3,16 @@ package de.trundicho.firstNameFinder.controller;
 import java.util.List;
 import java.util.function.BiFunction;
 
+import org.springframework.stereotype.Component;
+
 import de.trundicho.firstNameFinder.model.FilterModel;
 import de.trundicho.firstNameFinder.model.FirstName;
 import de.trundicho.firstNameFinder.model.Gender;
 
-public final class NameFilter {
+@Component
+public class NameFilter {
 
-    public boolean filterNames(FirstName name, String[] containsFilter, String[] startsWithFilter, String[] endsWithFilter,
+    public boolean filterNames(FirstName name, List<String> containsFilter, List<String> startsWithFilter, List<String> endsWithFilter,
             Integer minLength, Integer maxLength, Gender gender) {
         if (checkGender(name, gender)) {
             String firstName = name.getFirstName().toLowerCase();
@@ -28,7 +31,7 @@ public final class NameFilter {
         return length == null || firstName.length() <= length;
     }
 
-    private boolean filter(String firstName, String[] filter, BiFunction<String, String, Boolean> function) {
+    private boolean filter(String firstName, List<String> filter, BiFunction<String, String, Boolean> function) {
         FilterModel filterModel = new FilterModel(filter);
         List<String> filters = filterModel.getFilters();
         List<String> filtersNegate = filterModel.getFiltersNegate();

@@ -1,6 +1,5 @@
 package de.trundicho.firstNameFinder.model;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,9 +10,9 @@ public class FilterModel {
     private List<String> filters;
     private List<String> filtersNegate;
 
-    public FilterModel(String[] filter) {
-        filtersNegate = Arrays.stream(filter).filter(this::isNegate).map(f -> f.substring(1).toLowerCase()).collect(Collectors.toList());
-        filters = Arrays.stream(filter)
+    public FilterModel(List<String> filter) {
+        filtersNegate = filter.stream().filter(this::isNegate).map(f -> f.substring(1).toLowerCase()).collect(Collectors.toList());
+        filters = filter.stream()
                         .filter(f -> !isNegate(f))
                         .filter(f -> !StringUtils.pathEquals("-", f))
                         .map(String::toLowerCase)

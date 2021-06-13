@@ -1,9 +1,8 @@
 package de.trundicho.firstNameFinder.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.BiFunction;
 
 import de.trundicho.firstNameFinder.model.FirstName;
 import de.trundicho.firstNameFinder.model.Gender;
@@ -16,10 +15,9 @@ public final class NameFilter {
         final boolean maleGender = gender.equals(Gender.MALE);
         if (maleGender && !female || !maleGender && female) {
             String firstName = name.getFirstName().toLowerCase();
-            return isLongerThan(minLength, firstName) && isShorterThan(maxLength, firstName) && filterChars(firstName,
-                    Arrays.asList(containsFilter)) && filterChars(firstName,
-                    Arrays.stream(notContainsFilter).map(n -> "-" + n).collect(Collectors.toList())) && endsWithFilter(firstName,
-                    endsWithFilter) && startsWithFilter(firstName, startsWithFilter);
+            return isLongerThan(minLength, firstName) && isShorterThan(maxLength, firstName) && filterChars(firstName, containsFilter)
+                    && filterChars(firstName, Arrays.stream(notContainsFilter).map(n -> "-" + n).toArray(String[]::new)) && endsWithFilter(
+                    firstName, endsWithFilter) && startsWithFilter(firstName, startsWithFilter);
         }
         return false;
     }
@@ -32,115 +30,40 @@ public final class NameFilter {
         return length == null || firstName.length() <= length;
     }
 
-    private boolean filterChars(String firstName, List<String> filter) {
-        if (filter.isEmpty()) {
-            return true;
-        }
-        List<String> filters = new ArrayList<>();
-        List<String> filtersNegate = new ArrayList<>();
-        for (String filterString : filter) {
-            if (isNegate(filterString)) {
-                filtersNegate.add(filterString.substring(1).toLowerCase());
-            } else {
-                filters.add(filterString.toLowerCase());
-            }
-        }
-
-        boolean filterCheck = filters.isEmpty();
-        if (!filterCheck) {
-            filterCheck = true;
-            for (String string : filters) {
-                if (!firstName.contains(string)) {
-                    filterCheck = false;
-                }
-            }
-        }
-
-        boolean filterCheckNegate = filtersNegate.isEmpty();
-        if (!filterCheckNegate) {
-            filterCheckNegate = true;
-            for (String string : filtersNegate) {
-                if (firstName.contains(string)) {
-                    filterCheckNegate = false;
-                }
-            }
-        }
-        return filterCheck && filterCheckNegate;
+    private boolean filterChars(String firstName, String[] filter) {
+        return filter(firstName, filter, String::contains, (f1, f2) -> !f1.contains(f2));
     }
 
     private boolean endsWithFilter(String firstName, String[] filter) {
-        if (filter.length == 0) {
-            return true;
-        }
-        List<String> filters = new ArrayList<>();
-        List<String> filtersNegate = new ArrayList<>();
-        for (String string : filter) {
-            if (!isNegate(string)) {
-                filters.add(string.toLowerCase());
-            } else {
-                filtersNegate.add(string.substring(1).toLowerCase());
-            }
-        }
-
-        boolean filterCheck = filters.isEmpty();
-        for (String string : filters) {
-            if (firstName.endsWith(string)) {
-                filterCheck = true;
-            }
-
-        }
-
-        boolean filterCheckNegate = filtersNegate.isEmpty();
-        if (!filterCheckNegate) {
-            filterCheckNegate = true;
-            for (String string : filtersNegate) {
-                if (firstName.endsWith(string)) {
-                    filterCheckNegate = false;
-                }
-            }
-        }
-        return filterCheck && filterCheckNegate;
-    }
-
-    private boolean isNegate(String string) {
-        return string.startsWith("-") && string.length() > 1;
+        return filter(firstName, filter, String::endsWith, (f1, f2) -> !f1.endsWith(f2));
     }
 
     private boolean startsWithFilter(String firstName, String[] filter) {
-        if (filter.length == 0) {
-            return true;
-        }
-        List<String> filters = new ArrayList<>();
-        List<String> filtersNegate = new ArrayList<>();
-        for (String string : filter) {
-            if (isNegate(string)) {
-                filtersNegate.add(string.substring(1).toLowerCase());
-            } else {
-                filters.add(string.toLowerCase());
-            }
-        }
-
-        boolean filterCheck = filters.isEmpty();
-        for (String string : filters) {
-            if (firstName.startsWith(string)) {
-                filterCheck = true;
-            }
-
-        }
-
-        boolean filterCheckNegate = filtersNegate.isEmpty();
-        if (!filterCheckNegate) {
-            filterCheckNegate = true;
-            for (String string : filtersNegate) {
-                if (firstName.startsWith(string)) {
-                    filterCheckNegate = false;
-                }
-            }
-        }
-        return filterCheck && filterCheckNegate;
+        return filter(firstName, filter, String::startsWith, (f1, f2) -> !f1.startsWith(f2));
     }
 
     private boolean isFemale(FirstName name) {
         return name.getGender().contains("F");
+    }
+
+    private boolean filter(String firstName, String[] filter, BiFunction<String, String, Boolean> function,
+            BiFunction<String, String, Boolean> functionNegate) {
+        FilterModel filterModel = new FilterModel(filter);
+        boolean filterCheck = checkFilter(firstName, filterModel.getFilters(), function);
+        boolean filterCheckNegate = checkFilter(firstName, filterModel.getFiltersNegate(), functionNegate);
+        return filterCheck && filterCheckNegate;
+    }
+
+    private boolean checkFilter(String firstName, List<String> filters, BiFunction<String, String, Boolean> function) {
+        if (!filters.isEmpty()) {
+            boolean filterCheck = false;
+            for (String string : filters) {
+                if (function.apply(firstName, string)) {
+                    filterCheck = true;
+                }
+            }
+            return filterCheck;
+        }
+        return true;
     }
 }

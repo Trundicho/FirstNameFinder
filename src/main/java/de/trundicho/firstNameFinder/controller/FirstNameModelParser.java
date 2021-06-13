@@ -19,12 +19,12 @@ import de.trundicho.firstNameFinder.model.FirstNameModel;
  * Adjust it to read any file and parse male and female prenames.
  */
 @Component
-public class FirstNameModelBuilder {
+public class FirstNameModelParser {
 
     @Autowired
     ResourceLoader resourceLoader;
 
-    public FirstNameModel buildFirstNameModel(String fileName) {
+    public FirstNameModel parse(String fileName) {
         FirstNameModel firstNameModel = new FirstNameModel();
         Collection<FirstName> firstNames = firstNameModel.getFirstNames();
         Resource resource = resourceLoader.getResource("classpath:" + fileName);

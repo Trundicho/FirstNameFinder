@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import de.trundicho.firstNameFinder.model.FirstName;
 import de.trundicho.firstNameFinder.model.FirstNameModel;
-import de.trundicho.firstNameFinder.controller.FirstNameModelBuilder;
+import de.trundicho.firstNameFinder.controller.FirstNameModelParser;
 import de.trundicho.firstNameFinder.model.Gender;
-import de.trundicho.firstNameFinder.controller.NameFilter;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.Responsive;
@@ -35,13 +34,13 @@ public class NameFinderUi extends UI {
     private String nameDictionaryFileName;
 
     @Autowired
-    private FirstNameModelBuilder firstNameModelBuilder;
+    private FirstNameModelParser firstNameModelParser;
     private FirstNameModel firstNameModel;
 
     @Override
     protected void init(VaadinRequest request) {
         if (firstNameModel == null) {
-            firstNameModel = firstNameModelBuilder.buildFirstNameModel(nameDictionaryFileName);
+            firstNameModel = firstNameModelParser.parse(nameDictionaryFileName);
         }
         Grid<FirstName> grid = new Grid<>();
         final Collection<FirstName> all = firstNameModel.getFirstNames();

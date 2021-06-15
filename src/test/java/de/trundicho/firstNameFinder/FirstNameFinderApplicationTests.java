@@ -26,7 +26,7 @@ public class FirstNameFinderApplicationTests {
     @Test
     public void whenMultipleFilters_thenNameNotFiltered() {
         FirstName firstName = new FirstName("Albert", "M");
-        List<String> startsWithFilter = Arrays.asList("A", "-b");
+        List<String> startsWithFilter = Arrays.asList("C", "-b");
         List<String> containsFilter = Arrays.asList("-cc", "lBer");
         List<String> endsWithFilter = Arrays.asList("t", "-e");
         assertThat(nameFilter.filterNames(firstName, containsFilter, startsWithFilter, endsWithFilter, 0, 10, Gender.MALE)).isTrue();

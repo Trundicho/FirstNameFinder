@@ -6,7 +6,7 @@
     <groupId>de.trundicho</groupId>
     <artifactId>firstNameFinder</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>firstNameFinder</name>
     <description>Find a name</description>
@@ -21,7 +21,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <vaadin.version>8.12.3</vaadin.version>
         <start-class>de.trundicho.firstNameFinder.FirstNameFinderApplication</start-class>
     </properties>

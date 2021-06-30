@@ -53,7 +53,7 @@ public class NameFinderUi extends UI {
         Layout verticalLayout = new VerticalLayout();
         Layout horizontalLayout1 = new HorizontalLayout();
         horizontalLayout1.addComponent(new Label("FirstNameFinder - Filter separated by blank. Negation prefix: '-'"));
-        Layout horizontalLayout2 = new HorizontalLayout();
+        Layout horizontalLayout2 = new VerticalLayout();
         Layout horizontalLayout3 = new HorizontalLayout();
         RadioButtonGroup<String> gender = createGenderRadioGroup();
         TextField containsFilter = new TextField("Contains");

@@ -48,25 +48,25 @@ public class NameFinderUi extends UI {
         final Collection<FirstName> all = firstNameModel.getFirstNames();
         Comparator<FirstName> byFirstName = Comparator.comparing(FirstName::getFirstName);
 
-        grid.addColumn(FirstName::getFirstName).setCaption("Vorname");
+        grid.addColumn(FirstName::getFirstName).setCaption("First name");
 
         Layout verticalLayout = new VerticalLayout();
         Layout horizontalLayout1 = new HorizontalLayout();
-        horizontalLayout1.addComponent(new Label("FirstNameFinder - Filter Leerzeichen separiert. Negation postfix: '-'"));
+        horizontalLayout1.addComponent(new Label("FirstNameFinder - Filter separated by blank. Negation prefix: '-'"));
         Layout horizontalLayout2 = new HorizontalLayout();
         Layout horizontalLayout3 = new HorizontalLayout();
         RadioButtonGroup<String> gender = createGenderRadioGroup();
-        TextField containsFilter = new TextField("Enthält");
-        TextField endsWithFilter = new TextField("Endet mit");
-        TextField startsWithFilter = new TextField("Startet mit");
+        TextField containsFilter = new TextField("Contains");
+        TextField endsWithFilter = new TextField("Ends with");
+        TextField startsWithFilter = new TextField("Starts with");
 
         horizontalLayout2.addComponent(containsFilter);
         horizontalLayout2.addComponent(startsWithFilter);
         horizontalLayout2.addComponent(endsWithFilter);
         TextField numberOfNames = new TextField("#");
         numberOfNames.setEnabled(false);
-        Slider minLengthSlider = createSlider(1, "Min Länge");
-        Slider maxLengthSlider = createSlider(20, "Max Länge");
+        Slider minLengthSlider = createSlider(1, "Min length");
+        Slider maxLengthSlider = createSlider(20, "Max length");
         horizontalLayout3.addComponent(gender);
         horizontalLayout3.addComponent(minLengthSlider);
         horizontalLayout3.addComponent(maxLengthSlider);

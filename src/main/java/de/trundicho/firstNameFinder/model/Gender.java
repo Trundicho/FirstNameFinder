@@ -1,8 +1,8 @@
 package de.trundicho.firstNameFinder.model;
 
 public enum Gender {
-    MALE("Männlich"),
-    FEMALE("Weiblich");
+    MALE("Male"),
+    FEMALE("Female");
 
     private final String gender;
 

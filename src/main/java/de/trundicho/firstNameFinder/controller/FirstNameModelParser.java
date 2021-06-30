@@ -2,6 +2,8 @@ package de.trundicho.firstNameFinder.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -28,7 +30,7 @@ public class FirstNameModelParser {
         FirstNameModel firstNameModel = new FirstNameModel();
         Collection<FirstName> firstNames = firstNameModel.getFirstNames();
         Resource resource = resourceLoader.getResource("classpath:" + fileName);
-        try (InputStream inputStream = resource.getInputStream(); Scanner sc = new Scanner(inputStream)) {
+        try (InputStream inputStream = resource.getInputStream(); Scanner sc = new Scanner(inputStream, StandardCharsets.ISO_8859_1)) {
             while (sc.hasNextLine()) {
                 String zeile = sc.nextLine();
                 String[] split = zeile.split(" ");

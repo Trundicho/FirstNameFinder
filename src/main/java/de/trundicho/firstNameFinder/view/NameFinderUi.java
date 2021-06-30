@@ -26,7 +26,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-@SpringUI(path = "/ui")
+@SpringUI(path = "/")
 @Theme("valo")
 public class NameFinderUi extends UI {
 

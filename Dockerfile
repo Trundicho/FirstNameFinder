@@ -1,5 +1,5 @@
-FROM openjdk:8-jdk-alpine
+FROM adoptopenjdk:11-jre-hotspot
 EXPOSE 8080
-ARG JAR_FILE=target/firstNameFinder-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=target/firstNameFinder-0.0.1-SNAPSHOT.war
 ADD ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

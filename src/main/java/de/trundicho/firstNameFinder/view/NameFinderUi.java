@@ -60,8 +60,8 @@ public class NameFinderUi extends UI {
         TextField endsWithFilter = new TextField("Ends with");
         TextField startsWithFilter = new TextField("Starts with");
 
-        horizontalLayout2.addComponent(containsFilter);
         horizontalLayout2.addComponent(startsWithFilter);
+        horizontalLayout2.addComponent(containsFilter);
         horizontalLayout2.addComponent(endsWithFilter);
         TextField numberOfNames = new TextField("#");
         numberOfNames.setEnabled(false);

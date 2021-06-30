@@ -8,22 +8,13 @@ Use blank " " to filter multiple.
 
 ![Screenshot](FirstNameFinderExample.png)
 
-## Name data base is missing in the repo
+## Name data base
 FirstNameFinder is based on the prename dictionary `nam_dict.txt` of the `gender.c`-project.
 
 Download link for the original `gender`.c: http://www.heise.de/ct/ftp/07/17/182/
 
 Link to the (german) article introducing `gender.c`: https://www.heise.de/artikel-archiv/ct/2007/17/182
 
-I was not yet able to get the permission to publish the name database from heise.de.
-
-But there is a project on github that already published it:
-https://github.com/cstuder/genderReader/blob/master/gender.c/nam_dict.txt
-
-Just put it in the resources folder.
-
-You can also use your own and adjust FirstNameModelBuilder to read your own name database.
-Then you would also have to adjust the file name in the application.properties.
 ## Getting Started
 What things you need to install the software and how to install them
 
@@ -61,9 +52,13 @@ Put the generated war files in your application server (Tomcat, Jetty) or run th
 ## Authors
 Angelo Romito - Initial work - Trundicho
 
+The prename dictionary was created by Jörg Michael namequality.pro@googlemail.com. Updated and extended dictionaries are available commercially.
+
 ## License
 
 This project is licensed under Apache License Version 2.0 - see the LICENSE file for details
+
+The dictionary nam_dict.txt is licensed under the GNU Free Documentation License. (gender.c/gnu_doc.txt)
 
 ## Background
 First name finder was implemented between christmas and new year 2017/2018 to help to

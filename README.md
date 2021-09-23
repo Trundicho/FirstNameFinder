@@ -63,10 +63,3 @@ The dictionary nam_dict.txt is licensed under the GNU Free Documentation License
 ## Background
 First name finder was implemented between christmas and new year 2017/2018 to help to
 find a name for our child.
-
-<iframe src="http://trundichohost.dynv6.net:8083" name="iframe" frameborder="0" 
-            marginheight="0" 
-            marginwidth="0" 
-            width="600px" 
-            height="400px" 
-            scrolling="auto"></iframe>
